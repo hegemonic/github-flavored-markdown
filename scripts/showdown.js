@@ -74,6 +74,12 @@
 // Modifications are tagged with "isaacs"
 // **************************************************
 
+// **************************************************
+// Line-breaking modifications by benblank
+//
+// Modifications are tagged with "benblank"
+// **************************************************
+
 //
 // Showdown namespace
 //
@@ -119,6 +125,9 @@ var g_html_blocks;
 // (see _ProcessListItems() for details):
 var g_list_level = 0;
 
+// benblank - Allow hardwrapping to be disabled.
+var g_hardwrap;
+
 // isaacs - Allow passing in the GitHub object as an argument.
 this.makeHtml = function(text, gh) {
   if (typeof gh !== "undefined") {
@@ -140,6 +149,9 @@ this.makeHtml = function(text, gh) {
 	g_urls = new Array();
 	g_titles = new Array();
 	g_html_blocks = new Array();
+
+	// benblank - Allow hardwrapping to be disabled.
+	g_hardwrap = typeof this.hardwrap === "undefined" || this.hardwrap;
 
 	// attacklab: Replace ~ with ~T
 	// This lets us use tilde as an escape char to avoid md5 hashes
@@ -1179,7 +1191,8 @@ var _FormParagraphs = function(text) {
 		}
 		else if (str.search(/\S/) >= 0) {
 			str = _RunSpanGamut(str);
-			str = str.replace(/\n/g,"<br />");  // ** GFM **
+			// benblank - Allow hardwrapping to be disabled.
+			if (g_hardwrap) str = str.replace(/\n/g,"<br />");  // ** GFM **
 			str = str.replace(/^([ \t]*)/g,"<p>");
 			str += "</p>"
 			grafsOut.push(str);
