@@ -622,9 +622,9 @@ var writeAnchorTag = function(wholeMatch,m1,m2,m3,m4,m5,m6,m7) {
 		}
 		url = "#"+link_id;
 
-		if (g_urls[link_id] != undefined) {
+		if (Object.prototype.hasOwnProperty.call(g_urls, link_id)) {
 			url = g_urls[link_id];
-			if (g_titles[link_id] != undefined) {
+			if (Object.prototype.hasOwnProperty.call(g_titles, link_id)) {
 				title = g_titles[link_id];
 			}
 		}
@@ -727,9 +727,9 @@ var writeImageTag = function(wholeMatch,m1,m2,m3,m4,m5,m6,m7) {
 		}
 		url = "#"+link_id;
 
-		if (g_urls[link_id] != undefined) {
+		if (Object.prototype.hasOwnProperty.call(g_urls, link_id)) {
 			url = g_urls[link_id];
-			if (g_titles[link_id] != undefined) {
+			if (Object.prototype.hasOwnProperty.call(g_titles, link_id)) {
 				title = g_titles[link_id];
 			}
 		}
